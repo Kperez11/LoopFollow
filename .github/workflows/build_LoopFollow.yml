@@ -26,17 +26,7 @@ jobs:
 
     # Check GH_PAT, sync repository, check day in month
     steps:
-      # NEW LINES / LEO
-      - name: Regenerate Provisioning Profiles
-        run: |
-          fastlane match appstore --force_for_new_devices
-        env:
-          MATCH_KEYCHAIN_PASSWORD: ${{ secrets.MATCH_KEYCHAIN_PASSWORD }}
-          MATCH_KEYCHAIN_NAME: ${{ secrets.MATCH_KEYCHAIN_NAME }}
-          FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
-          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD }}
-      # END NEW LINES - LEO
+      
       - name: Access
         id: workflow-permission
         run: |
