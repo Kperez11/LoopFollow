@@ -26,7 +26,26 @@ jobs:
 
     # Check GH_PAT, sync repository, check day in month
     steps:
+      # NEW LINES / LEO
+      # Install project dependencies
+      - name: Install Project Dependencies
+        run: bundle install
 
+      # NEW: Regenerate provisioning profiles
+      - name: Regenerate Provisioning Profiles
+        run: bundle exec fastlane match appstore --force_for_new_devices
+        env:
+          TEAMID: ${{ secrets.TEAMID }}
+          GH_PAT: ${{ secrets.GH_PAT }}
+          FASTLANE_KEY_ID: ${{ secrets.FASTLANE_KEY_ID }}
+          FASTLANE_ISSUER_ID: ${{ secrets.FASTLANE_ISSUER_ID }}
+          FASTLANE_KEY: ${{ secrets.FASTLANE_KEY }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+
+      # Sync the GitHub runner clock...
+      - name: Sync clock
+        run: sudo sntp -sS time.windows.com
+      # END NEW LINES - LEO
       - name: Access
         id: workflow-permission
         run: |
